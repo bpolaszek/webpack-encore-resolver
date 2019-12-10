@@ -1,0 +1,35 @@
+{
+    "name": "bentools/webpack-encore-resolver",
+    "description": "Standalone path resolver for Webpack Encore",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Benoit POLASZEK",
+            "email": "bpolaszek@gmail.com"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "BenTools\\WebpackEncoreResolver\\": "src"
+        },
+        "files": [
+            "src/functions.php"
+        ]
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "BenTools\\WebpackEncoreResolver\\Tests\\": "tests"
+        }
+    },
+    "require": {
+        "php": ">=5.6",
+        "ext-json": "*"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^5.7",
+        "symfony/var-dumper": "^3.4",
+        "squizlabs/php_codesniffer": "^3.5",
+        "php-coveralls/php-coveralls": "^2.2"
+    }
+}
