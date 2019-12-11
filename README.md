@@ -45,10 +45,10 @@ You can generate versioned assets tags the following way:
 
 ```php
 <?php
+require_once __DIR__ . '/../vendor/autoload.php';
+
 use function BenTools\WebpackEncoreResolver\encore_entry_link_tags;
 use function BenTools\WebpackEncoreResolver\encore_entry_script_tags;
-
-require_once __DIR__ . '/../vendor/autoload.php';
 ?>
 <!doctype html>
 <html>
@@ -58,6 +58,31 @@ require_once __DIR__ . '/../vendor/autoload.php';
     <?php encore_entry_link_tags('main');?>
     <?php encore_entry_script_tags('main');?>
     <!-- ... -->
+```
+
+Alternative (for more control on your markup):
+
+```php
+<?php
+require_once __DIR__ . '/../vendor/autoload.php';
+
+use function BenTools\WebpackEncoreResolver\asset;
+use function BenTools\WebpackEncoreResolver\encore_entry_css_files;
+use function BenTools\WebpackEncoreResolver\encore_entry_js_files;
+?>
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <?php foreach (encore_entry_css_files('main') as $resource): ?>
+        <link rel="stylesheet" href="<?=$resource?>">
+    <?php endforeach; ?>
+    <?php foreach (encore_entry_js_files('main') as $resource): ?>
+        <script src="<?=$resource?>"></script>
+    <?php endforeach; ?>
+    <!-- Or request a specific resource -->
+    <link rel="stylesheet" href="<?=asset('main.css')?>">
 ```
 
 ## Caveats
