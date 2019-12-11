@@ -9,13 +9,11 @@
 # Webpack Encore Resolver
 
 [Webpack Encore](https://symfony.com/doc/current/frontend.html) can work as a standalone Javascript library with `yarn add @symfony/webpack-encore`. 
-However, to dynamically load assets (runtime, vendors, versionned assets, ...), 
+However, to dynamically load assets (runtime, vendors, versioned assets, ...), 
 you still need Symfony/Twig on the back-end part along with the [webpack-encore-bundle](https://github.com/symfony/webpack-encore-bundle).
 
 So, here is a standalone PHP package to port `asset()`, `encore_entry_js_files()`, `encore_entry_css_files()`, `encore_entry_script_tags()`, `encore_entry_link_tags()` functions 
 of [Webpack Encore](https://symfony.com/doc/current/frontend.html) outside of Twig's scope, in a vanilla PHP project.
-
-The goal is to support versioned assets, and automatically load `runtime.js`, vendors etc.
 
 ## Installation
 
@@ -87,7 +85,7 @@ use function BenTools\WebpackEncoreResolver\encore_entry_js_files;
 
 ## Caveats
 
-Multiple webpack configurations aren't supported at the moment. PRs welcome!
+Multiple webpack configurations / multiple manifests aren't supported at the moment. PRs welcome!
  
 
 ## Tests
