@@ -154,7 +154,7 @@ final class AssetPathResolver
 
     /**
      * @param $resource
-     * @return array|mixed
+     * @return string
      */
     public function getAssetPath($resource)
     {
