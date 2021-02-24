@@ -1,7 +1,7 @@
 [![Latest Stable Version](https://poser.pugx.org/bentools/webpack-encore-resolver/v/stable)](https://packagist.org/packages/bentools/webpack-encore-resolver)
 [![License](https://poser.pugx.org/bentools/webpack-encore-resolver/license)](https://packagist.org/packages/bentools/webpack-encore-resolver)
 [![Build Status](https://img.shields.io/travis/bpolaszek/webpack-encore-resolver/master.svg?style=flat-square)](https://travis-ci.org/bpolaszek/webpack-encore-resolver)
-[![Coverage Status](https://coveralls.io/repos/github/bpolaszek/webpack-encore-resolver/badge.svg?branch=master)](https://coveralls.io/github/bpolaszek/webpack-encore-resolver?branch=master)
+[![Coverage Status](https://codecov.io/gh/bpolaszek/webpack-encore-resolver/branch/master/graph/badge.svg?token=P1BJIMQIY3)](https://codecov.io/gh/bpolaszek/webpack-encore-resolver)
 [![Quality Score](https://img.shields.io/scrutinizer/g/bpolaszek/webpack-encore-resolver.svg?style=flat-square)](https://scrutinizer-ci.com/g/bpolaszek/webpack-encore-resolver)
 [![Total Downloads](https://poser.pugx.org/bentools/webpack-encore-resolver/downloads)](https://packagist.org/packages/bentools/webpack-encore-resolver)
 
