@@ -2,13 +2,14 @@
 
 namespace BenTools\WebpackEncoreResolver\Tests;
 
+use PHPUnit\Framework\TestCase;
 use function BenTools\WebpackEncoreResolver\asset;
 use function BenTools\WebpackEncoreResolver\encore_entry_css_files;
 use function BenTools\WebpackEncoreResolver\encore_entry_js_files;
 use function BenTools\WebpackEncoreResolver\encore_entry_link_tags;
 use function BenTools\WebpackEncoreResolver\encore_entry_script_tags;
 
-class AssetPathResolverTest extends \PHPUnit_Framework_TestCase
+class AssetPathResolverTest extends TestCase
 {
     const ASSETS_DIRECTORY = __DIR__.'/fixtures';
 
