@@ -17,6 +17,11 @@ final class AssetPathResolver
     /**
      * @var array
      */
+    private static $filesMap = [];
+
+    /**
+     * @var array
+     */
     private $manifest;
 
     /**
@@ -26,7 +31,8 @@ final class AssetPathResolver
 
     public function __construct($directory = null)
     {
-        $this->directory = (null !== $directory) ? $directory : $this->getDefaultDirectory();
+        $this->directory =
+            null !== $directory ? $directory : $this->getDefaultDirectory();
     }
 
     public static function setDefaultDirectory($directory)
@@ -43,9 +49,13 @@ final class AssetPathResolver
             return self::$DEFAULT_DIRECTORY;
         }
 
-        $docRoot = isset($_SERVER['DOCUMENT_ROOT']) ? $_SERVER['DOCUMENT_ROOT'] : \getcwd();
+        $docRoot = isset($_SERVER['DOCUMENT_ROOT'])
+            ? $_SERVER['DOCUMENT_ROOT']
+            : \getcwd();
 
-        return \rtrim($docRoot, \DIRECTORY_SEPARATOR).\DIRECTORY_SEPARATOR.'build';
+        return \rtrim($docRoot, \DIRECTORY_SEPARATOR) .
+            \DIRECTORY_SEPARATOR .
+            'build';
     }
 
     /**
@@ -54,20 +64,24 @@ final class AssetPathResolver
     private function getEntrypoints()
     {
         if (null === $this->entrypoints) {
-            $file = $this->directory.\DIRECTORY_SEPARATOR.'entrypoints.json';
+            $file =
+                $this->directory . \DIRECTORY_SEPARATOR . 'entrypoints.json';
             $content = \file_get_contents($file);
             if (false === $content) {
-                throw new \RuntimeException(\sprintf('Unable to read file "%s"', $file));
+                throw new \RuntimeException(
+                    \sprintf('Unable to read file "%s"', $file)
+                );
             }
 
             $json = \json_decode($content, true);
             if (\JSON_ERROR_NONE !== \json_last_error()) {
-                throw new \RuntimeException(\sprintf('Unable to decode json file "%s"', $file));
+                throw new \RuntimeException(
+                    \sprintf('Unable to decode json file "%s"', $file)
+                );
             }
 
             $this->entrypoints = $json['entrypoints'];
         }
-
         return $this->entrypoints;
     }
 
@@ -77,15 +91,19 @@ final class AssetPathResolver
     private function getManifest()
     {
         if (null === $this->manifest) {
-            $file = $this->directory.\DIRECTORY_SEPARATOR.'manifest.json';
+            $file = $this->directory . \DIRECTORY_SEPARATOR . 'manifest.json';
             $content = \file_get_contents($file);
             if (false === $content) {
-                throw new \RuntimeException(\sprintf('Unable to read file "%s"', $file));
+                throw new \RuntimeException(
+                    \sprintf('Unable to read file "%s"', $file)
+                );
             }
 
             $json = \json_decode($content, true);
             if (\JSON_ERROR_NONE !== \json_last_error()) {
-                throw new \RuntimeException(\sprintf('Unable to decode json file "%s"', $file));
+                throw new \RuntimeException(
+                    \sprintf('Unable to decode json file "%s"', $file)
+                );
             }
 
             $this->manifest = $json;
@@ -101,7 +119,9 @@ final class AssetPathResolver
     public function getWebpackJsFiles($entrypoint)
     {
         if (!\array_key_exists($entrypoint, $this->getEntrypoints())) {
-            throw new \InvalidArgumentException(\sprintf('Invalid entrypoint "%s"', $entrypoint));
+            throw new \InvalidArgumentException(
+                \sprintf('Invalid entrypoint "%s"', $entrypoint)
+            );
         }
 
         $files = $this->getEntrypoints()[$entrypoint];
@@ -119,7 +139,9 @@ final class AssetPathResolver
     public function getWebpackCssFiles($entrypoint)
     {
         if (!\array_key_exists($entrypoint, $this->getEntrypoints())) {
-            throw new \InvalidArgumentException(\sprintf('Invalid entrypoint "%s"', $entrypoint));
+            throw new \InvalidArgumentException(
+                \sprintf('Invalid entrypoint "%s"', $entrypoint)
+            );
         }
 
         $files = $this->getEntrypoints()[$entrypoint];
@@ -137,7 +159,10 @@ final class AssetPathResolver
     {
         $files = $this->getWebpackJsFiles($entrypoint);
         foreach ($files as $file) {
-            printf('<script src="%s"></script>', $file);
+            if (empty(static::$filesMap[$file])) {
+                printf('<script src="%s"></script>', $file);
+                static::$filesMap[$file] = true;
+            }
         }
     }
 
@@ -148,7 +173,10 @@ final class AssetPathResolver
     {
         $files = $this->getWebpackCssFiles($entrypoint);
         foreach ($files as $file) {
-            printf('<link rel="stylesheet" href="%s">', $file);
+            if (empty(static::$filesMap[$file])) {
+                printf('<link rel="stylesheet" href="%s">', $file);
+                static::$filesMap[$file] = true;
+            }
         }
     }
 
